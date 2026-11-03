@@ -23,7 +23,9 @@
 #    define RAPIDFUZZ_IF_CONSTEXPR if
 #endif
 
-#if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201402L) || __cplusplus >= 201402L)
+#if defined(_MSC_VER) && !defined(__clang__) && _MSC_VER < 1910
+#    define RAPIDFUZZ_CONSTEXPR_CXX14 inline
+#elif ((defined(_MSVC_LANG) && _MSVC_LANG >= 201402L) || __cplusplus >= 201402L)
 #    define RAPIDFUZZ_CONSTEXPR_CXX14 constexpr
 #else
 #    define RAPIDFUZZ_CONSTEXPR_CXX14 inline
